@@ -77,23 +77,35 @@ const render = (options: IOptions) => {
 };
 
 const close = (id = 'skeletion-base') => {
-  setTimeout(()=>{
+  setTimeout(() => {
     const view = document.getElementById(id);
-  if (view) {
-    if ((view as any).onClose) {
-      (view as any).onClose();
-      (view as any).onClose = undefined;
+    if (view) {
+      if ((view as any).onClose) {
+        (view as any).onClose();
+        (view as any).onClose = undefined;
+      }
+      if (view.parentNode) {
+        view.parentNode.removeChild(view);
+      }
     }
-    if (view.parentNode) {
-      view.parentNode.removeChild(view);
-    }
-  }
   }, 20);
 };
 
 const vSkeleton = {
-  render,
-  close,
+  render: (options: IOptions) => {
+    try {
+      render(options);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  close: (id: string) => {
+    try {
+      close(id);
+    } catch (error) {
+      console.error(error);
+    }
+  },
   cell,
 };
 
