@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>vSkeleton Example</title>
+    <script src="https://unpkg.com/vanilla-skeleton@0.1.5/umd/vSkeleton.js"></script>
+  </head>
+  <body>
+    <script>
+      var cell = vSkeleton.cell({
+        layout: 'image, title-info-info2',
+        style: { height: '8rem', marginBottom: '10px' },
+        imageStyle: { borderRadius: '6px' },
+        titleStyle: { height: '5rem' },
+        infoStyle: { height: '1.2rem' },
+      });
+      var icons = vSkeleton.cell({
+        layout: 'image, image, image, image',
+        style: { height: '60px', marginBottom: '10px' },
+        emptyStyle: { width: '10px' },
+      });
+      var ele = vSkeleton.render({
+        space: '8px',
+        cellStyle: { paddingLeft: '10px', paddingRight: '10px' },
+        header: {
+          safeTop: 'auto',
+        },
+        bottomBar: {
+          count: 4,
+          safeBottom: '22px',
+        },
+        cells: [{ layout: 'empty', style: { height: '10px' } }, icons, icons, cell, cell, cell, cell],
+        // gradientAnimeColor: '#e8e8e8',
+        opacityAnime: true,
+      });
+      document.body.appendChild(ele);
+    </script>
+    <div id="root"></div>
+  </body>
+</html>

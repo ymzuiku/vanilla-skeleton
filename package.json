@@ -1,0 +1,25 @@
+{
+  "name": "vanilla-skeleton",
+  "version": "0.2.2",
+  "main": "umd/vSkeleton.js",
+  "types": "umd/index.d.ts",
+  "description": "Ease render skeleton use vanilla.js",
+  "private": false,
+  "scripts": {
+    "lib": "node rollup.config.js"
+  },
+  "devDependencies": {
+    "rollup": "^1.24.0",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "rollup-plugin-uglify": "^6.0.3",
+    "typescript": "3.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ymzuiku/vanilla-skeleton.git"
+  },
+  "bugs": {
+    "url": "git+https://github.com/ymzuiku/vanilla-skeleton.git"
+  },
+  "homepage": "git+https://github.com/ymzuiku/vanilla-skeleton.git"
+}
