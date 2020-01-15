@@ -1,6 +1,6 @@
 {
   "name": "vanilla-skeleton",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "umd/vSkeleton.js",
   "types": "umd/index.d.ts",
   "description": "Ease render skeleton use vanilla.js",

@@ -29,48 +29,53 @@ document.head.appendChild(keyFrame);
 
 const render = (options: IOptions) => {
   const view = document.createElement('div');
-  view.id = options.id || 'skeletion-base';
 
-  let { onClose, ref, style = {} } = options;
+  try {
+    let { onClose, ref, style = {}, id } = options;
 
-  if (onClose) {
-    (view as any).onClose = onClose;
-  }
+    view.id = id || 'skeletion-base';
 
-  // 渲染header
-  const header = renderHeader(options);
-  if (header) {
-    view.appendChild(header);
-  }
+    if (onClose) {
+      (view as any).onClose = onClose;
+    }
 
-  // 渲染cells
-  const cells = renderCells(options);
-  if (cells) {
-    view.appendChild(cells);
-  }
+    // 渲染header
+    const header = renderHeader(options);
+    if (header) {
+      view.appendChild(header);
+    }
 
-  // 渲染底部
-  const bottom = renderBottom(options);
-  if (bottom) {
-    view.appendChild(bottom);
-  }
+    // 渲染cells
+    const cells = renderCells(options);
+    if (cells) {
+      view.appendChild(cells);
+    }
 
-  setStyle({
-    padding: '0px',
-    margin: '0px',
-    width: '100vw',
-    height: '100vh',
-    zIndex: '9999',
-    position: 'fixed',
-    left: '0px',
-    top: '0px',
-    overflow: 'auto',
-    background: '#fff',
-    ...style,
-  })(view);
+    // 渲染底部
+    const bottom = renderBottom(options);
+    if (bottom) {
+      view.appendChild(bottom);
+    }
 
-  if (ref) {
-    ref(view);
+    setStyle({
+      padding: '0px',
+      margin: '0px',
+      width: '100vw',
+      height: '100vh',
+      zIndex: '9999',
+      position: 'fixed',
+      left: '0px',
+      top: '0px',
+      overflow: 'auto',
+      background: '#fff',
+      ...style,
+    })(view);
+
+    if (ref) {
+      ref(view);
+    }
+  } catch (error) {
+    console.error('vSkeletonError:', error);
   }
 
   return view;
@@ -80,7 +85,7 @@ const close = (id = 'skeletion-base') => {
   setTimeout(() => {
     const view = document.getElementById(id);
     if (view) {
-      if ((view as any).onClose) {
+      if (typeof (view as any).onClose === 'function') {
         (view as any).onClose();
         (view as any).onClose = undefined;
       }
@@ -92,20 +97,8 @@ const close = (id = 'skeletion-base') => {
 };
 
 const vSkeleton = {
-  render: (options: IOptions) => {
-    try {
-      render(options);
-    } catch (error) {
-      console.error(error);
-    }
-  },
-  close: (id: string) => {
-    try {
-      close(id);
-    } catch (error) {
-      console.error(error);
-    }
-  },
+  render,
+  close,
   cell,
 };
 
